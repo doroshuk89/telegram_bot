@@ -35,12 +35,22 @@ class TelegramBot
         return $response->result;
     }
     public function sendMessage($text, $chat_id) {
+        $keyboard = array(
+            "keyboard" =>   [
+                                [
+                                    [ "text" => "Ваша Локация", "request_location" => true],
+                                    [ "text" => "Кнопка"],
+                                    [ "text" => "youTube"]
+                                ]
+                            ],
+            "resize_keyboard" => true
+                );
+
             $response = $this->query('sendMessage', [
                 'text' => $text,
                 'chat_id' => $chat_id,
+                'reply_markup' => json_encode($keyboard),
             ]);
         return $response;
     }
-
-
 }
